@@ -135,7 +135,6 @@ function timeElapse(date, mode) {
 
 	if (hours < 0) {
 		hours += 24;
-		current.setDate(current.getDate() - 1);
 	}
 	
 	if (hours < 10) {

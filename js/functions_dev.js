@@ -116,10 +116,7 @@ function timeElapse(date, mode) {
 		current.setHours(current.getHours() - 1);
 	}
 	hours = current.getHours() - date.getHours();
-	if (hours < 0) {
-		hours += 24;
-		current.setDate(current.getDate() - 1);
-	}
+	
 	if (mode == 1) {
 		days = current.getDate() - date.getDate();
 		if (days < 0) {
@@ -133,9 +130,14 @@ function timeElapse(date, mode) {
 		}
 		years = current.getFullYear() - date.getFullYear();
 	} else {
-		days = Math.floor((current.getTime() - date.getTime()) / (1000 * 3600 * 24));
+		days = Math.floor((Math.abs(current.getTime() - together.getTime()))/(1000 * 3600 * 24));
 	}
 
+	if (hours < 0) {
+		hours += 24;
+		current.setDate(current.getDate() - 1);
+	}
+	
 	if (hours < 10) {
 		hours = "0" + hours;
 	}
@@ -148,9 +150,9 @@ function timeElapse(date, mode) {
 	var result = (years > 0 ? "<span class=\"digit\">" + years + "</span> year ":"")
 	result += (months >= 0 ? "<span class=\"digit\">" + months + "</span> month ":"");
 	result += "<span class=\"digit\">" + days + "</span> day ";
-	result += "<span class=\"digit\">" + hours + "</span> hr "
-	result += "<span class=\"digit\">" + minutes + "</span> min "
-	result += "<span class=\"digit\">" + seconds + "</span> sec";
+	result += "<span class=\"digit\">" + hours + "</span> h "
+	result += "<span class=\"digit\">" + minutes + "</span> m "
+	result += "<span class=\"digit\">" + seconds + "</span> s";
 	
 	$("#elapseClock").html(result);
 }
